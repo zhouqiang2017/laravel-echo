@@ -20,6 +20,15 @@ Route::get('/order', function () {
 
     //触发事件两种方式
     \App\Events\OrderUpdated::dispatch($order);
-//    event(\App\Events\OrderUpdated());
+//    event(new \App\Events\OrderUpdated($order));
 //    return view('welcome');
+});
+Route::get('/tasks', function () {
+
+    return \App\Task::all()->pluck('body');
+});
+
+Route::post('/tasks',function(){
+   $task = \App\Task::forceCreate(['body' => request('body')]);
+    App\Events\TaskCreated::dispatch($task);
 });

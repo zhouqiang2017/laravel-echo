@@ -55,5 +55,7 @@ window.Echo = new Echo({
     encrypted: true
 });
 window.Echo.channel('orders').listen('OrderUpdated', e => {
+
     console.log(e);
+    $('.title').text(e.order.name)
 })
